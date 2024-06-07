@@ -14,8 +14,8 @@ import java.util.List;
 public class UserPrinciple implements UserDetails {
     @Serial
     private static final long serialVersionUID = 1;
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
     private final Collection<? extends GrantedAuthority> roles;
 
     public UserPrinciple(String username, String password,

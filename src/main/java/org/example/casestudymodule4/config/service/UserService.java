@@ -21,4 +21,12 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         return UserPrinciple.build(userRepository.findUserByUsername(username));
     }
+
+    public boolean existByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
 }
