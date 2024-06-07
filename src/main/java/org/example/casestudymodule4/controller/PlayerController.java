@@ -28,14 +28,9 @@ public class PlayerController {
         return new ResponseEntity<>(playerService.findByid(id), HttpStatus.OK);
     }
 
-//    @PostMapping
-//    public ResponseEntity<?> save(@RequestBody Player player) {
-//        playerService.save(player);
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
-    @PostMapping("/upload")
-    public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
-        playerService.savePlayerDTO(playerDTO);
+@PostMapping("/upload")
+public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
+    playerService.savePlayerDTO(playerDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -55,17 +50,5 @@ public class PlayerController {
             playerService.save(player);
             return new ResponseEntity<>(computerOptional.get(), HttpStatus.OK);
         }
-//    }
-//    @PutMapping("/upload/{id}")
-//    private ResponseEntity<?> editUpload(@PathVariable Long id, ComputerDTO computerDTO, @RequestBody Computer computer){
-//        Optional<Computer> computerOptional = Optional.ofNullable(computerService.findByid(id));
-//        if (!computerOptional.isPresent()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        else {
-//            computer.setId(id);
-//            computerService.saveComputerDTO(computerDTO);
-//            return new ResponseEntity<>(computerOptional.get(), HttpStatus.OK);
-//        }
     }
 }
