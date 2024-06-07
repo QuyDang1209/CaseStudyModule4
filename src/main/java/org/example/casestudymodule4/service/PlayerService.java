@@ -50,7 +50,7 @@ public class PlayerService implements IPlayerService {
             throw new RuntimeException(e);
         }
         // chuyen doi ComputerDTO -> Computer
-        Player player = new Player();
+        Player player = playerRepository.findById(playerDTO.getId()).get();
         player.setCode(playerDTO.getCode());
         player.setName(playerDTO.getName());
         player.setDob(playerDTO.getDob());
