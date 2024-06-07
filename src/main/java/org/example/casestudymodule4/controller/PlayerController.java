@@ -40,15 +40,15 @@ public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
     @PutMapping("/{id}")
-    private ResponseEntity<?> edit(@PathVariable Long id,  PlayerDTO player){
-        player.setId(id);
+    private ResponseEntity<?> edit(@PathVariable Long id,  PlayerDTO playerDTO){
+        playerDTO.setId(id);
         Optional<Player> computerOptional = Optional.ofNullable(playerService.findByid(id));
         if (!computerOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         else {
-            player.setId(id);
-            playerService.savePlayerDTO(player);
+            playerDTO.setId(id);
+            playerService.savePlayerDTO(playerDTO);
             return new ResponseEntity<>(computerOptional.get(), HttpStatus.OK);
         }
     }

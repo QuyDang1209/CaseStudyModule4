@@ -49,8 +49,13 @@ public class PlayerService implements IPlayerService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        // chuyen doi ComputerDTO -> Computer
-        Player player = playerRepository.findById(playerDTO.getId()).get();
+
+        Player player = null;
+        if (playerDTO.getId() == null) {
+            player = new Player();
+        }else{
+            player = playerRepository.findById(playerDTO.getId()).get();
+        }
         player.setCode(playerDTO.getCode());
         player.setName(playerDTO.getName());
         player.setDob(playerDTO.getDob());
