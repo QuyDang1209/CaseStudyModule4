@@ -1,6 +1,7 @@
 package org.example.casestudymodule4.controller;
 
 import org.example.casestudymodule4.model.Coach;
+import org.example.casestudymodule4.model.dto.CoachDTO;
 import org.example.casestudymodule4.service.ICoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,5 +59,11 @@ public class CoachController {
         }
         coachService.remove(id);
         return new ResponseEntity<>(coachOptional.get(), HttpStatus.OK);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> saveUpload(CoachDTO coachDTO) {
+        coachService.saveCoachDTO(coachDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
