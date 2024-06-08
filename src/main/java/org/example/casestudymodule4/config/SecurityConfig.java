@@ -76,6 +76,11 @@ public class SecurityConfig {
 //                        .requestMatchers(HttpMethod.PUT,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
 //                        .requestMatchers(HttpMethod.POST,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
 //                        .requestMatchers(HttpMethod.DELETE,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/api/player/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/api/player/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/player/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE,"/api/player/**").permitAll()
+
                 )
                 .exceptionHandling(customizer -> customizer.accessDeniedHandler(customAccessDeniedHandler()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

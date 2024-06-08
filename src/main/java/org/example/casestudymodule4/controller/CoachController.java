@@ -1,14 +1,13 @@
 package org.example.casestudymodule4.controller;
 
 import org.example.casestudymodule4.model.Coach;
-import org.example.casestudymodule4.model.dto.CoachDTO;
+import org.example.casestudymodule4.model.DTO.CoachDTO;
 import org.example.casestudymodule4.service.ICoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
