@@ -76,6 +76,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/player/**").permitAll()
                         .requestMatchers(HttpMethod.PUT,"/api/player/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE,"/api/player/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/playertracking/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/playertracking/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
 //                        .requestMatchers(HttpMethod.PUT,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
 //                        .requestMatchers(HttpMethod.POST,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
