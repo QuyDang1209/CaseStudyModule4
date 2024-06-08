@@ -50,9 +50,14 @@ public class CoachService implements ICoachService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        Coach coach = null;
+        if (coachDTO.getId() == null){
+            coach = new Coach();
+        }else {
+            coach = coachRepository.findById(coachDTO.getId()).get();
+        }
 
-        // chuyen doi ComputerDTO -> Computer
-        Coach coach = new Coach();
+
         coach.setCode(coachDTO.getCode());
         coach.setName(coachDTO.getName());
         coach.setDob(coachDTO.getDob());

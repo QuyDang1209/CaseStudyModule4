@@ -20,11 +20,8 @@ public class CoachController {
 
     @GetMapping
     public ResponseEntity<Iterable<Coach>> findAllCoach() {
-        List<Coach> coaches = (List<Coach>) coachService.findAll();
-        if (coaches.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(coaches, HttpStatus.OK);
+
+        return new ResponseEntity<>(coachService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -37,18 +34,26 @@ public class CoachController {
     }
 
     @PostMapping
-    public ResponseEntity<Coach> saveCustomer(@RequestBody Coach coach) {
-        return new ResponseEntity<>(coachService.save(coach), HttpStatus.CREATED);
+    public ResponseEntity<Coach> saveCustomer( CoachDTO coachDTO) {
+git         coachService.saveCoachDTO(coachDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
+
     @PutMapping("/{id}")
-    public ResponseEntity<Coach> updateCustomer(@PathVariable Long id, @RequestBody Coach coach) {
-        Optional<Coach> coachOptional = coachService.findById(id);
+    private ResponseEntity<?> edit(@PathVariable Long id,   CoachDTO coachDTO){
+        coachDTO.setId(id);
+        Optional<Coach> coachOptional = Optional.ofNullable(coachService.findById(id).get());
         if (!coachOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        coach.setId(coachOptional.get().getId());
-        return new ResponseEntity<>(coachService.save(coach), HttpStatus.OK);
+        else {
+            coachDTO.setId(id);
+            coachService.saveCoachDTO(coachDTO);
+            return new ResponseEntity<>(coachOptional.get(), HttpStatus.OK);
+        }
+
     }
 
     @DeleteMapping("/{id}")
