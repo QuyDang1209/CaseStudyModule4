@@ -13,7 +13,7 @@ public interface ICoachTrackingService {
     CoachTracking findByid(Long id);
     void save(CoachTracking coachTracking);
     void deleteById(Long id);
-    List<CoachTracking> savePlayerTrackingDTO(List<CoachTrackingDTO> coachTrackingList);
+    List<CoachTracking> saveCoachTrackingDTO(List<CoachTrackingDTO> coachTrackingList);
 
 
 }

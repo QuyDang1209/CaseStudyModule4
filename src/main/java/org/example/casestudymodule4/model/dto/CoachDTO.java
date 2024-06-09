@@ -1,28 +1,22 @@
-package org.example.casestudymodule4.model;
+package org.example.casestudymodule4.model.dto;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name ="coachs")
-public class Coach {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class CoachDTO {
+
     private Long id;
     private String code;
     private String name;
     private String dob;
     private String address;
     private double salary;
-    private String img;
-
-
+    private MultipartFile img;
 
 }

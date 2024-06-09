@@ -15,10 +15,12 @@ public class CoachTrackingService implements ICoachTrackingService {
     @Autowired
     private ICoachTrackingRepository coachTrackingRepository;
 
+    @Autowired
+    private ICoachService coachService;
 
     @Override
     public List<CoachTracking> findAll() {
-        return null;
+        return coachTrackingRepository.findAll();
     }
 
     @Override
@@ -42,19 +44,21 @@ public class CoachTrackingService implements ICoachTrackingService {
     }
 
     @Override
-    public List<CoachTracking> savePlayerTrackingDTO(List<CoachTrackingDTO> coachTrackingDTO) {
+    public List<CoachTracking> saveCoachTrackingDTO(List<CoachTrackingDTO> coachTrackingDTO) {
         List<CoachTracking> coachTrackingList = coachTrackingRepository.findAll();
         for (CoachTrackingDTO c : coachTrackingDTO) {
-        CoachTracking coachTracking = new CoachTracking();
-        coachTracking.setCoach(coachTrackingRepository.findById(c.getCoach()).get().getCoach());
-        coachTracking.setBonusweak1(c.getBonusweak1());
-        coachTracking.setBonusweak2(c.getBonusweak2());
-        coachTracking.setBonusweak3(c.getBonusweak3());
-        coachTracking.setBonusweak4(c.getBonusweak4());
-        coachTracking.setMonth(c.getMonth());
-        coachTracking.setYear(c.getYear());
-        coachTracking.setTotalsalary(c.getBonusweak1()+c.getBonusweak2()+c.getBonusweak3()+c.getBonusweak4());
+            CoachTracking coachTracking = new CoachTracking();
+            coachTracking.setCoach(coachService.findById(c.getCoach()).get());
+            coachTracking.setBonusweak1(c.getBonusweak1());
+            coachTracking.setBonusweak2(c.getBonusweak2());
+            coachTracking.setBonusweak3(c.getBonusweak3());
+            coachTracking.setBonusweak4(c.getBonusweak4());
+            coachTracking.setMonth(c.getMonth());
+            coachTracking.setYear(c.getYear());
+            coachTracking.setTotalsalary(c.getBonusweak1() + c.getBonusweak2() + c.getBonusweak3() + c.getBonusweak4() + coachService.findById(c.getCoach()).get().getSalary());
+            coachTrackingRepository.save(coachTracking);
+            coachTrackingList.add(coachTracking);
         }
-        return null;
+        return coachTrackingList;
     }
 }
