@@ -10,8 +10,10 @@ import java.util.List;
 
 @Repository
 public interface IPlayerRepository extends JpaRepository<Player, Long> {
+
     @Query("select p from Player  p where p.name like %?1%")
     List<Player> findByName(String name);
 
     List<Player> findPlayersByStatus(Status status);
+
 }
