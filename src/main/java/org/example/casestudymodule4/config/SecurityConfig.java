@@ -70,11 +70,9 @@ public class SecurityConfig {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+
                         .requestMatchers("/static/**").permitAll()
                         .requestMatchers("/**").permitAll()
-//                        .requestMatchers("/api/auth/login**").permitAll()
-
                         .requestMatchers(HttpMethod.GET,"/api/player/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/player/**").permitAll()
                         .requestMatchers(HttpMethod.PUT,"/api/player/**").permitAll()
@@ -87,11 +85,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/coaches/**").permitAll()
                         .requestMatchers(HttpMethod.PUT,"/api/coaches/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE,"/api/coaches/**").permitAll()
-
-//                        .requestMatchers(HttpMethod.GET,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
-//                        .requestMatchers(HttpMethod.PUT,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
-//                        .requestMatchers(HttpMethod.POST,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
-//                        .requestMatchers(HttpMethod.DELETE,"/api/computers/**").hasAnyAuthority("ROLE_ADMIN")
                 )
                 .exceptionHandling(customizer -> customizer.accessDeniedHandler(customAccessDeniedHandler()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
