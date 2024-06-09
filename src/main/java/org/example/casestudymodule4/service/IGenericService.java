@@ -10,4 +10,6 @@ public interface IGenericService<T> {
     T save(T t);
 
     void remove(Long id);
+
+
 }

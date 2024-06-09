@@ -37,12 +37,12 @@ public class CoachController {
     }
 
     @PostMapping
-    public ResponseEntity<Coach> saveCustomer(@RequestBody Coach coach) {
+    public ResponseEntity<Coach> saveCoach(@RequestBody Coach coach) {
         return new ResponseEntity<>(coachService.save(coach), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Coach> updateCustomer(@PathVariable Long id, @RequestBody Coach coach) {
+    public ResponseEntity<Coach> updateCoach(@PathVariable Long id, @RequestBody Coach coach) {
         Optional<Coach> coachOptional = coachService.findById(id);
         if (!coachOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -52,7 +52,7 @@ public class CoachController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Coach> deleteCustomer(@PathVariable Long id) {
+    public ResponseEntity<Coach> deleteCoach(@PathVariable Long id) {
         Optional<Coach> coachOptional = coachService.findById(id);
         if (!coachOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,6 +1,7 @@
 package org.example.casestudymodule4.service;
 
 import org.example.casestudymodule4.model.Player;
+import org.example.casestudymodule4.model.Status;
 import org.example.casestudymodule4.model.dto.PlayerDTO;
 import org.example.casestudymodule4.repository.IPlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -71,5 +73,22 @@ public class PlayerService implements IPlayerService {
 
         playerRepository.save(player);
         return player ;
+    }
+
+    @Override
+    public List<Player> findPlayersByName(String name) {
+        return playerRepository.findByName(name);
+    }
+
+    @Override
+    public List<Player> findPlayersByStatus(Status status) {
+        List<Player> listPer = new ArrayList<>();
+        List<Player> list = playerRepository.findAll();
+        for(Player p : list) {
+            if (p.getStatus().getId() == status.getId()) {
+                listPer.add(p);
+            }
+        }
+        return listPer;
     }
 }

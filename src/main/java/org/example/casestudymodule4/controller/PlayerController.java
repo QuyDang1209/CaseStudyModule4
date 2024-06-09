@@ -1,6 +1,7 @@
 package org.example.casestudymodule4.controller;
 
 import org.example.casestudymodule4.model.Player;
+import org.example.casestudymodule4.model.Status;
 import org.example.casestudymodule4.model.dto.PlayerDTO;
 import org.example.casestudymodule4.service.IPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,27 @@ import java.util.Optional;
 public class PlayerController {
 @Autowired
     private IPlayerService playerService;
+
     @GetMapping("")
-    public ResponseEntity<List<Player>> findAll() {
-        return new ResponseEntity<>(playerService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<Player>> findAll(@RequestParam(value = "name", required = false) String name) {
+
+        List<Player> list;
+        if (name != null) {
+            list = playerService.findPlayersByName(name);
+        } else {
+            list = playerService.findAll();
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+//    @GetMapping("")
+//    public ResponseEntity<List<Player>> findAll() {
+//        return new ResponseEntity<>(playerService.findAll(), HttpStatus.OK);
+//    }
+
+    @GetMapping("/status/{id}")
+    public ResponseEntity<List<Player>> findByStatus(Status status) {
+        return new ResponseEntity<>(playerService.findPlayersByStatus(status), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
