@@ -72,7 +72,7 @@ public class PlayerService implements IPlayerService {
         playerRepository.save(player);
         return player ;
     }
-
+    /*
     @Override
     public void deleteAllByID(List<Player> players) {
         List<Long> playlist = new ArrayList<>();
@@ -81,4 +81,6 @@ public class PlayerService implements IPlayerService {
         }
         playerRepository.deleteAllPlayerById(playlist);
     }
+
+     */
 }

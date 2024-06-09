@@ -1,11 +1,13 @@
 package org.example.casestudymodule4.controller;
 
+import jakarta.validation.Valid;
 import org.example.casestudymodule4.model.Player;
 import org.example.casestudymodule4.model.dto.PlayerDTO;
 import org.example.casestudymodule4.service.IPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,10 +30,15 @@ public class PlayerController {
         return new ResponseEntity<>(playerService.findByid(id), HttpStatus.OK);
     }
 
-@PostMapping("/upload")
-public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
+    @PostMapping("/upload")
+    public ResponseEntity<String> saveUpload(@Valid @ModelAttribute PlayerDTO playerDTO,
+                                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors().toString());
+        }
     playerService.savePlayerDTO(playerDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    //        return new ResponseEntity<>(HttpStatus.CREATED);
+    return ResponseEntity.ok("Player created successfully");
     }
 
     @DeleteMapping("/{id}")

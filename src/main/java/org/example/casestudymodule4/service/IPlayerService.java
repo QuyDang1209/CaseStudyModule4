@@ -11,6 +11,6 @@ public interface IPlayerService {
     void save(Player player);
     void deleteById(Long id);
 
-    void deleteAllByID(List<Player> players);
+//    void deleteAllByID(List<Player> players);
     Player savePlayerDTO(PlayerDTO playerDTO);
 }

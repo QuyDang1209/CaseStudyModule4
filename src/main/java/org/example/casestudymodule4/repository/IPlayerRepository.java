@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface IPlayerRepository extends JpaRepository<Player, Long> {
-    List<Player> deleteAllPlayerById(List<Long> id);
+//    List<Player> deleteAllPlayerById(List<Long> id);
 }

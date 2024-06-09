@@ -1,15 +1,19 @@
 package org.example.casestudymodule4.controller;
 
+import jakarta.validation.Valid;
 import org.example.casestudymodule4.model.Coach;
 import org.example.casestudymodule4.model.dto.CoachDTO;
 import org.example.casestudymodule4.service.ICoachService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
@@ -67,8 +71,16 @@ public class CoachController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> saveUpload(CoachDTO coachDTO) {
+    public ResponseEntity<String> saveUpload(@Valid @ModelAttribute CoachDTO coachDTO,
+                                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errorMessages = bindingResult.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(String.join(", ", errorMessages));
+        }
         coachService.saveCoachDTO(coachDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+//        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok("Coach created successfully");
     }
 }
