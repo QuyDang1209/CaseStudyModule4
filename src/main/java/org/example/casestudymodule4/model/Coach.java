@@ -3,6 +3,9 @@ package org.example.casestudymodule4.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -19,5 +22,7 @@ public class Coach {
     private String address;
     private double salary;
     private String img;
+
+
 
 }

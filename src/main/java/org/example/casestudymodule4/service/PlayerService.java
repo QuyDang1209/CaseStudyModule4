@@ -49,8 +49,12 @@ public class PlayerService implements IPlayerService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        // chuyen doi ComputerDTO -> Computer
-        Player player = new Player();
+        Player player = null;
+        if (playerDTO.getId() == null) {
+            player = new Player();
+        }else{
+            player = playerRepository.findById(playerDTO.getId()).get();
+        }
         player.setCode(playerDTO.getCode());
         player.setName(playerDTO.getName());
         player.setDob(playerDTO.getDob());
@@ -67,4 +71,13 @@ public class PlayerService implements IPlayerService {
         playerRepository.save(player);
         return player ;
     }
+
+//    @Override
+//    public void deleteAllByID(List<Player> players) {
+//        List<Long> playlist = new ArrayList<>();
+//        for(Player p :players){
+//            playlist.add(p.getId());
+//        }
+//        playerRepository.deleteAllPlayerById(playlist);
+//    }
 }

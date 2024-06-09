@@ -23,7 +23,11 @@ public class PlayerTracking {
     private Long weak2;
     private Long weak3;
     private Long weak4;
+    private Integer month;
+    private Integer year;
     private double bonus;
+
+    private Double totalSalary;
     @ManyToOne
     @JoinColumn(name = "performences_id")
     private Performence performence;

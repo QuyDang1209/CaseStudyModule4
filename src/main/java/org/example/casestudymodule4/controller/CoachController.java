@@ -41,7 +41,8 @@ public class CoachController {
 
 
     @PutMapping("/{id}")
-    private ResponseEntity<?> edit(@PathVariable Long id,   CoachDTO coachDTO){
+
+    private ResponseEntity<?> edit(@PathVariable Long id, CoachDTO coachDTO){
         coachDTO.setId(id);
         Optional<Coach> coachOptional = Optional.ofNullable(coachService.findById(id).get());
         if (!coachOptional.isPresent()) {

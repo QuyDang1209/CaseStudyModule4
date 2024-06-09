@@ -19,10 +19,12 @@ public class CoachTracking {
     @ManyToOne
     @JoinColumn(name = "coachs_id")
     private Coach coach;
-    private Long weak1;
-    private Long weak2;
-    private Long weak3;
-    private Long weak4;
-    private double bonus;
+    private Long bonusweak1;
+    private Long bonusweak2;
+    private Long bonusweak3;
+    private Long bonusweak4;
+    private Integer month;
+    private Integer year;
+    private double totalsalary;
 
 }
