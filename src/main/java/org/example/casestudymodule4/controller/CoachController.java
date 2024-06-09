@@ -42,13 +42,18 @@ public class CoachController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Coach> updateCustomer(@PathVariable Long id, @RequestBody Coach coach) {
-        Optional<Coach> coachOptional = coachService.findById(id);
+    private ResponseEntity<?> edit(@PathVariable Long id, CoachDTO coachDTO){
+        coachDTO.setId(id);
+        Optional<Coach> coachOptional = Optional.ofNullable(coachService.findById(id).get());
         if (!coachOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        coach.setId(coachOptional.get().getId());
-        return new ResponseEntity<>(coachService.save(coach), HttpStatus.OK);
+        else {
+            coachDTO.setId(id);
+            coachService.saveCoachDTO(coachDTO);
+            return new ResponseEntity<>(coachOptional.get(), HttpStatus.OK);
+        }
+
     }
 
     @DeleteMapping("/{id}")

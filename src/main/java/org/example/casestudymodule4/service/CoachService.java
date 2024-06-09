@@ -42,7 +42,6 @@ public class CoachService implements ICoachService {
 
     @Override
     public Coach saveCoachDTO(CoachDTO coachDTO) {
-        // save Multipart de lay urlImage
         MultipartFile multipartFile = coachDTO.getImg();
         String urlImage = multipartFile.getOriginalFilename();
         try {
@@ -50,19 +49,19 @@ public class CoachService implements ICoachService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        // chuyen doi ComputerDTO -> Computer
-        Coach coach = new Coach();
+        Coach coach = null;
+        if (coachDTO.getId() == null){
+            coach = new Coach();
+        }else {
+            coach = coachRepository.findById(coachDTO.getId()).get();
+        }
         coach.setCode(coachDTO.getCode());
         coach.setName(coachDTO.getName());
         coach.setDob(coachDTO.getDob());
         coach.setAddress(coachDTO.getAddress());
         coach.setSalary(coachDTO.getSalary());
-
-        // gan urlImage vao Computer
         coach.setImg(urlImage);
         coachRepository.save(coach);
-
         return coach;
     }
 }
