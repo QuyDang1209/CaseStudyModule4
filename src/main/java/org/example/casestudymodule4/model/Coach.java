@@ -18,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name ="coachs")
-public class Coach implements Validator {
+public class Coach{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,35 +35,4 @@ public class Coach implements Validator {
     private double salary;
     @NotBlank(message = "Image URL is mandatory")
     private String img;
-
-
-    @Override
-    public <T> Set<ConstraintViolation<T>> validate(T t, Class<?>... classes) {
-        return Set.of();
-    }
-
-    @Override
-    public <T> Set<ConstraintViolation<T>> validateProperty(T t, String s, Class<?>... classes) {
-        return Set.of();
-    }
-
-    @Override
-    public <T> Set<ConstraintViolation<T>> validateValue(Class<T> aClass, String s, Object o, Class<?>... classes) {
-        return Set.of();
-    }
-
-    @Override
-    public BeanDescriptor getConstraintsForClass(Class<?> aClass) {
-        return null;
-    }
-
-    @Override
-    public <T> T unwrap(Class<T> aClass) {
-        return null;
-    }
-
-    @Override
-    public ExecutableValidator forExecutables() {
-        return null;
-    }
 }
