@@ -61,7 +61,12 @@ public class PlayerTrackingService implements IPlayerTrackingService{
             playerTracking.setYear(p.getYear());
             playerTracking.setBonus(p.getBonus());
             playerTracking.setPerformence(perFormenceRepository.findById(p.getPerformence()).get());
-            playerTracking.setTotalSalary(playerService.findByid(p.getPlayer()).getSalary()+p.getWeak1()*p.getWeak2()*p.getWeak3()*p.getWeak4()+p.getBonus());
+            playerTracking.setTotalSalary(playerService.findByid(p.getPlayer()).getSalary()
+                    + p.getWeak1() * (perFormenceRepository.findById(p.getPerformence()).get().getSph())
+                    + p.getWeak2() * (perFormenceRepository.findById(p.getPerformence()).get().getSph())
+                    + p.getWeak3() * (perFormenceRepository.findById(p.getPerformence()).get().getSph())
+                    + p.getWeak4() * (perFormenceRepository.findById(p.getPerformence()).get().getSph())
+                    +p.getBonus());
             playerTrackingRepository.save(playerTracking);
             playerTrackingList.add(playerTracking);
         }

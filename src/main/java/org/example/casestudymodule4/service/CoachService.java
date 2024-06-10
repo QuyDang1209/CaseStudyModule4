@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -63,5 +64,10 @@ public class CoachService implements ICoachService {
         coach.setImg(urlImage);
         coachRepository.save(coach);
         return coach;
+    }
+
+    @Override
+    public List<Coach> findCoachByName(String name) {
+        return coachRepository.findByName(name);
     }
 }

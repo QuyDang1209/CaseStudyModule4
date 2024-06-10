@@ -12,7 +12,6 @@ public interface IPlayerService {
     void save(Player player);
     void deleteById(Long id);
 
-//    void deleteAllByID(List<Player> players);
     Player savePlayerDTO(PlayerDTO playerDTO);
 
     List<Player> findPlayersByName(String name);
