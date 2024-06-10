@@ -1,5 +1,6 @@
 package org.example.casestudymodule4.service;
 
+import org.example.casestudymodule4.model.DTO.PlayerStatusDTO;
 import org.example.casestudymodule4.model.Player;
 import org.example.casestudymodule4.model.DTO.PlayerDTO;
 
@@ -13,4 +14,5 @@ public interface IPlayerService {
 
 //    void deleteAllByID(List<Player> players);
     Player savePlayerDTO(PlayerDTO playerDTO);
+    void changeStatus(List<PlayerStatusDTO> playerStatusDTOS);
 }

@@ -1,5 +1,6 @@
 package org.example.casestudymodule4.controller;
 
+import org.example.casestudymodule4.model.DTO.PlayerStatusDTO;
 import org.example.casestudymodule4.model.Player;
 import org.example.casestudymodule4.model.DTO.PlayerDTO;
 import org.example.casestudymodule4.service.IPlayerService;
@@ -50,6 +51,15 @@ public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
             playerDTO.setId(id);
             playerService.savePlayerDTO(playerDTO);
             return new ResponseEntity<>(computerOptional.get(), HttpStatus.OK);
+        }
+    }
+    @PutMapping("/change-status")
+    public ResponseEntity<?> changeStatus(@RequestBody List<PlayerStatusDTO> playerStatusDTOS){
+        try {
+            playerService.changeStatus(playerStatusDTOS);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
