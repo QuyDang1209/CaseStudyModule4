@@ -25,14 +25,25 @@ public class CoachController {
     @Autowired
     private AppUtils appUtils;
 
-    @GetMapping
-    public ResponseEntity<Iterable<Coach>> findAllCoach() {
-        List<Coach> coaches = (List<Coach>) coachService.findAll();
-        if (coaches.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @GetMapping("")
+    public ResponseEntity<List<Coach>> findAllCoaches(@RequestParam(value = "name", required = false) String name) {
+        List<Coach> list;
+        if (name != null) {
+            list = coachService.findCoachByName(name);
+        } else {
+            list = (List<Coach>) coachService.findAll();
         }
-        return new ResponseEntity<>(coaches, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+//    @GetMapping
+//    public ResponseEntity<Iterable<Coach>> findAllCoach() {
+//        List<Coach> coaches = (List<Coach>) coachService.findAll();
+//        if (coaches.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(coaches, HttpStatus.OK);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Coach> findCoachById(@PathVariable Long id) {
@@ -44,7 +55,7 @@ public class CoachController {
     }
 
     @PostMapping
-    public ResponseEntity<Coach> saveCustomer(@RequestBody Coach coach) {
+    public ResponseEntity<Coach> saveCoach(@RequestBody Coach coach) {
         return new ResponseEntity<>(coachService.save(coach), HttpStatus.CREATED);
     }
 
@@ -52,6 +63,7 @@ public class CoachController {
     private ResponseEntity<?> edit(@PathVariable Long id, CoachDTO coachDTO){
         coachDTO.setId(id);
         Optional<Coach> coachOptional = Optional.ofNullable(coachService.findById(id).get());
+
         if (!coachOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -64,7 +76,7 @@ public class CoachController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Coach> deleteCustomer(@PathVariable Long id) {
+    public ResponseEntity<Coach> deleteCoach(@PathVariable Long id) {
         Optional<Coach> coachOptional = coachService.findById(id);
         if (!coachOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

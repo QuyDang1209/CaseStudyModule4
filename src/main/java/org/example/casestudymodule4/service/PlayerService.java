@@ -1,6 +1,7 @@
 package org.example.casestudymodule4.service;
 
 import org.example.casestudymodule4.model.Player;
+import org.example.casestudymodule4.model.Status;
 import org.example.casestudymodule4.model.dto.PlayerDTO;
 import org.example.casestudymodule4.repository.IPlayerRepository;
 import org.example.casestudymodule4.specication.PlayerSpecification;
@@ -35,7 +36,7 @@ public class PlayerService implements IPlayerService {
 
     @Override
     public void save(Player player) {
-    playerRepository.save(player);
+        playerRepository.save(player);
     }
 
     @Override
@@ -52,10 +53,11 @@ public class PlayerService implements IPlayerService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         Player player = null;
         if (playerDTO.getId() == null) {
             player = new Player();
-        }else{
+        } else {
             player = playerRepository.findById(playerDTO.getId()).get();
         }
         player.setCode(playerDTO.getCode());
@@ -72,16 +74,24 @@ public class PlayerService implements IPlayerService {
         player.setStatus(playerDTO.getStatus());
 
         playerRepository.save(player);
-        return player ;
+        return player;
     }
     /*
     @Override
-    public void deleteAllByID(List<Player> players) {
-        List<Long> playlist = new ArrayList<>();
-        for(Player p :players){
-            playlist.add(p.getId());
+    public List<Player> findPlayersByName(String name) {
+        return playerRepository.findByName(name);
+    }
+
+    @Override
+    public List<Player> findPlayersByStatus(Status status) {
+        List<Player> listPer = new ArrayList<>();
+        List<Player> list = playerRepository.findAll();
+        for (Player p : list) {
+            if (p.getStatus().getId() == status.getId()) {
+                listPer.add(p);
+            }
         }
-        playerRepository.deleteAllPlayerById(playlist);
+        return listPer;
     }
 
      */
