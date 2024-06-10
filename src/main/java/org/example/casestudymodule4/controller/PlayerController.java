@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.example.casestudymodule4.model.Player;
 import org.example.casestudymodule4.model.dto.PlayerDTO;
 import org.example.casestudymodule4.service.IPlayerService;
+import org.example.casestudymodule4.utils.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,11 @@ import java.util.Optional;
 @CrossOrigin("*")
 @RequestMapping("/api/player")
 public class PlayerController {
-@Autowired
+    @Autowired
     private IPlayerService playerService;
+
+    @Autowired
+    private AppUtils appUtils;
     @GetMapping("")
     public ResponseEntity<List<Player>> findAll() {
         return new ResponseEntity<>(playerService.findAll(), HttpStatus.OK);
@@ -31,14 +35,15 @@ public class PlayerController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> saveUpload(@Valid @ModelAttribute PlayerDTO playerDTO,
+    public ResponseEntity<?> saveUpload(@Valid @ModelAttribute PlayerDTO playerDTO,
                                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body(bindingResult.getAllErrors().toString());
+//            return ResponseEntity.badRequest().body(bindingResult.getAllErrors().toString());
+            return appUtils.mapErrorToResponse(bindingResult);
         }
-    playerService.savePlayerDTO(playerDTO);
-    //        return new ResponseEntity<>(HttpStatus.CREATED);
-    return ResponseEntity.ok("Player created successfully");
+        playerService.savePlayerDTO(playerDTO);
+        //        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok("Player created successfully");
     }
 
     @DeleteMapping("/{id}")
@@ -59,4 +64,16 @@ public class PlayerController {
             return new ResponseEntity<>(computerOptional.get(), HttpStatus.OK);
         }
     }
+
+    @GetMapping("/search")
+    public List<Player> searchPlayers(@RequestParam(required = false)String name,
+                                      @RequestParam(required = false)Double salary){
+        return playerService.searchPlayers(name, salary);
+    }
+
+    @GetMapping("/searchBySalaryRange")
+    public List<Player> searchBySalaryRange(@RequestParam double minSalary, @RequestParam double maxSalary) {
+        return playerService.findBySalaryRange(minSalary, maxSalary);
+    }
+
 }

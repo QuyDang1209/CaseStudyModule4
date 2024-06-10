@@ -13,4 +13,8 @@ public interface IPlayerService {
 
 //    void deleteAllByID(List<Player> players);
     Player savePlayerDTO(PlayerDTO playerDTO);
+
+    List<Player> searchPlayers(String name, Double salary);
+
+    List<Player> findBySalaryRange(double minSalary, double maxSalary);
 }

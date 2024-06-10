@@ -1,5 +1,7 @@
 package org.example.casestudymodule4.model.dto;
 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,14 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.casestudymodule4.model.Performence;
 import org.example.casestudymodule4.model.Status;
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Component
 public class PlayerDTO {
     private Long id;
 

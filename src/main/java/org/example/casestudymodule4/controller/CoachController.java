@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.example.casestudymodule4.model.Coach;
 import org.example.casestudymodule4.model.dto.CoachDTO;
 import org.example.casestudymodule4.service.ICoachService;
+import org.example.casestudymodule4.utils.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
 public class CoachController {
     @Autowired
     private ICoachService coachService;
+    @Autowired
+    private AppUtils appUtils;
 
     @GetMapping
     public ResponseEntity<Iterable<Coach>> findAllCoach() {
@@ -71,13 +74,17 @@ public class CoachController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> saveUpload(@Valid @ModelAttribute CoachDTO coachDTO,
+    public ResponseEntity<?> saveUpload(@Valid @ModelAttribute CoachDTO coachDTO,
                                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            /*
             List<String> errorMessages = bindingResult.getAllErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .collect(Collectors.toList());
             return ResponseEntity.badRequest().body(String.join(", ", errorMessages));
+
+             */
+            return appUtils.mapErrorToResponse(bindingResult);
         }
         coachService.saveCoachDTO(coachDTO);
 //        return new ResponseEntity<>(HttpStatus.CREATED);
