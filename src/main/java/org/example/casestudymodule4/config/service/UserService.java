@@ -21,4 +21,12 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         return UserPrinciple.build(userRepository.findUserByUsername(username));
     }
+
+    public User authenticate(String username, String password) {
+        User user = userRepository.findUserByUsername(username);
+        if (user != null && password.equals(user.getPassword())) {
+            return user; // Authentication successful
+        }
+        return null; // Authentication failed
+    }
 }
