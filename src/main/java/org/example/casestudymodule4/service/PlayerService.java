@@ -3,7 +3,9 @@ package org.example.casestudymodule4.service;
 import org.example.casestudymodule4.model.Player;
 import org.example.casestudymodule4.model.Status;
 import org.example.casestudymodule4.model.dto.PlayerDTO;
+import org.example.casestudymodule4.model.dto.PlayerStatusDTO;
 import org.example.casestudymodule4.repository.IPlayerRepository;
+import org.example.casestudymodule4.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class PlayerService implements IPlayerService {
     private String upload;
     @Autowired
     IPlayerRepository playerRepository;
+
+    @Autowired
+    StatusRepository statusRepository;
 
     @Override
     public List<Player> findAll() {
@@ -90,5 +95,17 @@ public class PlayerService implements IPlayerService {
             }
         }
         return listPer;
+    }
+
+    @Override
+    public void changeStatus(List<PlayerStatusDTO> playerStatusDTOS) {
+        for (PlayerStatusDTO dto : playerStatusDTOS) {
+            Player player = playerRepository.findById(dto.getId()).orElse(null);
+            if (player != null) {
+                Status status = statusRepository.findById(dto.getStatusId()).orElse(null);
+                player.setStatus(status);
+                playerRepository.save(player);
+            }
+        }
     }
 }
