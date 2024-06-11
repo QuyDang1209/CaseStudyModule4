@@ -76,6 +76,16 @@ public class PlayerService implements IPlayerService {
         playerRepository.save(player);
         return player;
     }
+
+    @Override
+    public List<Player> findPlayersByName(String name) {
+        return List.of();
+    }
+
+    @Override
+    public List<Player> findPlayersByStatus(Status status) {
+        return List.of();
+    }
     /*
     @Override
     public List<Player> findPlayersByName(String name) {

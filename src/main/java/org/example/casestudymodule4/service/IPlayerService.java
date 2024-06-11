@@ -17,4 +17,8 @@ public interface IPlayerService {
     List<Player> findPlayersByName(String name);
 
     List<Player> findPlayersByStatus(Status status);
+
+    List<Player> searchPlayers(String name, Double salary);
+
+    List<Player> findBySalaryRange(double minSalary, double maxSalary);
 }
