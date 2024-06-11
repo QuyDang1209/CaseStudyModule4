@@ -3,6 +3,7 @@ package org.example.casestudymodule4.controller;
 import org.example.casestudymodule4.model.Player;
 import org.example.casestudymodule4.model.Status;
 import org.example.casestudymodule4.model.dto.PlayerDTO;
+import org.example.casestudymodule4.model.dto.PlayerStatusDTO;
 import org.example.casestudymodule4.service.IPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,4 +72,15 @@ public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
             return new ResponseEntity<>(computerOptional.get(), HttpStatus.OK);
         }
     }
+
+    @PutMapping("/change-status")
+    public ResponseEntity<?> changeStatus(@RequestBody List<PlayerStatusDTO> playerStatusDTOS){
+        try {
+            playerService.changeStatus(playerStatusDTOS);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
+

@@ -18,14 +18,25 @@ public class CoachController {
     @Autowired
     private ICoachService coachService;
 
-    @GetMapping
-    public ResponseEntity<Iterable<Coach>> findAllCoach() {
-        List<Coach> coaches = (List<Coach>) coachService.findAll();
-        if (coaches.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @GetMapping("")
+    public ResponseEntity<List<Coach>> findAllCoaches(@RequestParam(value = "name", required = false) String name) {
+        List<Coach> list;
+        if (name != null) {
+            list = coachService.findCoachByName(name);
+        } else {
+            list = (List<Coach>) coachService.findAll();
         }
-        return new ResponseEntity<>(coaches, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+//    @GetMapping
+//    public ResponseEntity<Iterable<Coach>> findAllCoach() {
+//        List<Coach> coaches = (List<Coach>) coachService.findAll();
+//        if (coaches.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(coaches, HttpStatus.OK);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Coach> findCoachById(@PathVariable Long id) {
