@@ -16,4 +16,5 @@ public interface IPlayerRepository extends JpaRepository<Player, Long> {
 
     List<Player> findPlayersByStatus(Status status);
 
+    List<Player> findBySalaryBetween(double minSalary, double maxSalary);
 }

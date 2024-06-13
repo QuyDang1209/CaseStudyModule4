@@ -20,4 +20,6 @@ public interface IPlayerService {
     List<Player> findPlayersByStatus(Status status);
 
     void changeStatus(List<PlayerStatusDTO> playerStatusDTOS);
+
+    List<Player> findBySalaryRange(double minSalary, double maxSalary);
 }

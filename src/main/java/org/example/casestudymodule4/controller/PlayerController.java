@@ -83,5 +83,10 @@ private ResponseEntity<?> edit(@PathVariable Long id,  PlayerDTO playerDTO){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/searchBySalaryRange")
+    public List<Player> searchBySalaryRange(@RequestParam double minSalary, @RequestParam double maxSalary) {
+        return playerService.findBySalaryRange(minSalary, maxSalary);
+    }
 }
 

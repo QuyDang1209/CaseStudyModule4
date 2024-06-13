@@ -108,4 +108,9 @@ public class PlayerService implements IPlayerService {
             }
         }
     }
+
+    @Override
+    public List<Player> findBySalaryRange(double minSalary, double maxSalary) {
+        return playerRepository.findBySalaryBetween(minSalary, maxSalary);
+    }
 }
