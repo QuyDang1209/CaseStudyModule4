@@ -2,8 +2,10 @@ package org.example.casestudymodule4.service;
 
 import org.example.casestudymodule4.model.DTO.PlayerStatusDTO;
 import org.example.casestudymodule4.model.Player;
+
 import org.example.casestudymodule4.model.DTO.PlayerDTO;
 import org.example.casestudymodule4.model.Status;
+
 import org.example.casestudymodule4.repository.IPlayerRepository;
 import org.example.casestudymodule4.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +27,7 @@ public class PlayerService implements IPlayerService {
     IPlayerRepository playerRepository;
     @Autowired
     StatusRepository statusRepository;
+
 
     @Override
     public List<Player> findAll() {
@@ -37,7 +41,7 @@ public class PlayerService implements IPlayerService {
 
     @Override
     public void save(Player player) {
-    playerRepository.save(player);
+        playerRepository.save(player);
     }
 
     @Override
@@ -54,10 +58,11 @@ public class PlayerService implements IPlayerService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         Player player = null;
         if (playerDTO.getId() == null) {
             player = new Player();
-        }else{
+        } else {
             player = playerRepository.findById(playerDTO.getId()).get();
         }
         player.setCode(playerDTO.getCode());
@@ -74,10 +79,11 @@ public class PlayerService implements IPlayerService {
         player.setStatus(playerDTO.getStatus());
 
         playerRepository.save(player);
-        return player ;
+        return player;
     }
 
     @Override
+
     public void changeStatus(List<PlayerStatusDTO> playerStatusDTOS) {
             for (PlayerStatusDTO dto : playerStatusDTOS) {
                 Player player = playerRepository.findById(dto.getId()).orElse(null);
@@ -98,5 +104,23 @@ public class PlayerService implements IPlayerService {
 //        }
 //        playerRepository.deleteAllPlayerById(playlist);
 //    }
+
+
+    public List<Player> findPlayersByName(String name) {
+        return playerRepository.findByName(name);
+    }
+
+    @Override
+    public List<Player> findPlayersByStatus(Status status) {
+        List<Player> listPer = new ArrayList<>();
+        List<Player> list = playerRepository.findAll();
+        for (Player p : list) {
+            if (p.getStatus().getId() == status.getId()) {
+                listPer.add(p);
+            }
+        }
+        return listPer;
+    }
+
 
 }
