@@ -1,11 +1,9 @@
-package org.example.casestudymodule4.model.dto;
+package org.example.casestudymodule4.model.DTO;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.casestudymodule4.model.Coach;
 
 @NoArgsConstructor
 @AllArgsConstructor

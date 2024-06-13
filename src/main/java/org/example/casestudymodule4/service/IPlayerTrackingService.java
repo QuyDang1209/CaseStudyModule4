@@ -1,9 +1,7 @@
 package org.example.casestudymodule4.service;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import org.example.casestudymodule4.model.Player;
 import org.example.casestudymodule4.model.PlayerTracking;
-import org.example.casestudymodule4.model.dto.PlayerTrackingDTO;
+import org.example.casestudymodule4.model.DTO.PlayerTrackingDTO;
 
 import java.util.List;
 

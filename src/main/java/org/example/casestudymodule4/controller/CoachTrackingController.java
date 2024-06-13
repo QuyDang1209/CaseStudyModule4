@@ -1,9 +1,7 @@
 package org.example.casestudymodule4.controller;
 
 import org.example.casestudymodule4.model.CoachTracking;
-import org.example.casestudymodule4.model.PlayerTracking;
-import org.example.casestudymodule4.model.dto.CoachTrackingDTO;
-import org.example.casestudymodule4.model.dto.PlayerTrackingDTO;
+import org.example.casestudymodule4.model.DTO.CoachTrackingDTO;
 import org.example.casestudymodule4.service.ICoachTrackingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,5 +28,9 @@ public class CoachTrackingController {
     @GetMapping("/{month}/{year}")
     public ResponseEntity<List<CoachTracking>> findAll(@PathVariable Integer month, @PathVariable Integer year) {
         return new ResponseEntity<>(coachTrackingService.findAllByMonthAndYear(month,year), HttpStatus.OK);
+    }
+    @GetMapping("/{id}/{month}/{year}")
+    public ResponseEntity<List<CoachTracking>> findCoachTrackingByIdAndMonthAndYear(@PathVariable Long id, @PathVariable Integer month, @PathVariable Integer year) {
+        return new ResponseEntity<>(coachTrackingService.findCoachTrackingByIdAndMonthAndYear(id,month,year), HttpStatus.OK);
     }
 }

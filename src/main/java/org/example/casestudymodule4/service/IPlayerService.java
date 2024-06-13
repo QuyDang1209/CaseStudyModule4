@@ -1,9 +1,12 @@
 package org.example.casestudymodule4.service;
 
+import org.example.casestudymodule4.model.DTO.PlayerStatusDTO;
 import org.example.casestudymodule4.model.Player;
+
+import org.example.casestudymodule4.model.DTO.PlayerDTO;
+
 import org.example.casestudymodule4.model.Status;
-import org.example.casestudymodule4.model.dto.PlayerDTO;
-import org.example.casestudymodule4.model.dto.PlayerStatusDTO;
+
 
 import java.util.List;
 
@@ -15,9 +18,12 @@ public interface IPlayerService {
 
     Player savePlayerDTO(PlayerDTO playerDTO);
 
+    void changeStatus(List<PlayerStatusDTO> playerStatusDTOS);
+
+
     List<Player> findPlayersByName(String name);
 
     List<Player> findPlayersByStatus(Status status);
 
-    void changeStatus(List<PlayerStatusDTO> playerStatusDTOS);
+
 }

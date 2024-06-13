@@ -1,9 +1,12 @@
 package org.example.casestudymodule4.controller;
 
+import org.example.casestudymodule4.model.DTO.PlayerStatusDTO;
 import org.example.casestudymodule4.model.Player;
+
+import org.example.casestudymodule4.model.DTO.PlayerDTO;
+
 import org.example.casestudymodule4.model.Status;
-import org.example.casestudymodule4.model.dto.PlayerDTO;
-import org.example.casestudymodule4.model.dto.PlayerStatusDTO;
+
 import org.example.casestudymodule4.service.IPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,5 +85,6 @@ public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }
 

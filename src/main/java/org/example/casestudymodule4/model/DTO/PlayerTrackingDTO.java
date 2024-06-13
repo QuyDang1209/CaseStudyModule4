@@ -1,13 +1,10 @@
-package org.example.casestudymodule4.model.dto;
+package org.example.casestudymodule4.model.DTO;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.casestudymodule4.model.Performence;
-import org.example.casestudymodule4.model.Player;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -1,7 +1,7 @@
 package org.example.casestudymodule4.controller;
 
 import org.example.casestudymodule4.model.Coach;
-import org.example.casestudymodule4.model.dto.CoachDTO;
+import org.example.casestudymodule4.model.DTO.CoachDTO;
 import org.example.casestudymodule4.service.ICoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +18,11 @@ public class CoachController {
     @Autowired
     private ICoachService coachService;
 
+//    @GetMapping
+//    public ResponseEntity<Iterable<Coach>> findAllCoach() {
+//
+//        return new ResponseEntity<>(coachService.findAll(), HttpStatus.OK);
+//    }
     @GetMapping("")
     public ResponseEntity<List<Coach>> findAllCoaches(@RequestParam(value = "name", required = false) String name) {
         List<Coach> list;
@@ -48,11 +53,16 @@ public class CoachController {
     }
 
     @PostMapping
+
     public ResponseEntity<Coach> saveCoach(@RequestBody Coach coach) {
         return new ResponseEntity<>(coachService.save(coach), HttpStatus.CREATED);
+
     }
 
+
+
     @PutMapping("/{id}")
+
     private ResponseEntity<?> edit(@PathVariable Long id, CoachDTO coachDTO){
         coachDTO.setId(id);
         Optional<Coach> coachOptional = Optional.ofNullable(coachService.findById(id).get());

@@ -1,9 +1,7 @@
 package org.example.casestudymodule4.controller;
 
-import org.example.casestudymodule4.model.Player;
 import org.example.casestudymodule4.model.PlayerTracking;
-import org.example.casestudymodule4.model.dto.PlayerTrackingDTO;
-import org.example.casestudymodule4.repository.IPlayerTrackingRepository;
+import org.example.casestudymodule4.model.DTO.PlayerTrackingDTO;
 import org.example.casestudymodule4.service.IPlayerTrackingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

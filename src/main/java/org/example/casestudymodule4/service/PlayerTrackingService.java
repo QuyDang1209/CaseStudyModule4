@@ -1,13 +1,12 @@
 package org.example.casestudymodule4.service;
 
 import org.example.casestudymodule4.model.PlayerTracking;
-import org.example.casestudymodule4.model.dto.PlayerTrackingDTO;
+import org.example.casestudymodule4.model.DTO.PlayerTrackingDTO;
 import org.example.casestudymodule4.repository.IPerFormenceRepository;
 import org.example.casestudymodule4.repository.IPlayerTrackingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
