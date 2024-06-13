@@ -31,4 +31,9 @@ public class CoachTrackingController {
     public ResponseEntity<List<CoachTracking>> findAll(@PathVariable Integer month, @PathVariable Integer year) {
         return new ResponseEntity<>(coachTrackingService.findAllByMonthAndYear(month,year), HttpStatus.OK);
     }
+
+    @GetMapping("/{id}/{month}/{year}")
+    public ResponseEntity<List<CoachTracking>> findAllCoachTracking(@PathVariable Long id, @PathVariable Integer month, @PathVariable Integer year) {
+        return new ResponseEntity<>(coachTrackingService.findAllCoachTrackingByIdAndMonthAndYear(id, month, year), HttpStatus.OK);
+    }
 }

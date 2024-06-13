@@ -54,24 +54,25 @@ public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
-    private ResponseEntity<?> delete(@PathVariable Long id) {
-        playerService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+@DeleteMapping("/{id}")
+private ResponseEntity<?> delete(@PathVariable Long id) {
+    playerService.deleteById(id);
+    return new ResponseEntity<>(HttpStatus.ACCEPTED);
+}
+
+@PutMapping("/{id}")
+private ResponseEntity<?> edit(@PathVariable Long id,  PlayerDTO playerDTO){
+    playerDTO.setId(id);
+    Optional<Player> computerOptional = Optional.ofNullable(playerService.findByid(id));
+    if (!computerOptional.isPresent()) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @PutMapping("/{id}")
-    private ResponseEntity<?> edit(@PathVariable Long id,  PlayerDTO playerDTO){
+    else {
         playerDTO.setId(id);
-        Optional<Player> computerOptional = Optional.ofNullable(playerService.findByid(id));
-        if (!computerOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            playerDTO.setId(id);
-            playerService.savePlayerDTO(playerDTO);
-            return new ResponseEntity<>(computerOptional.get(), HttpStatus.OK);
-        }
+        playerService.savePlayerDTO(playerDTO);
+        return new ResponseEntity<>(computerOptional.get(), HttpStatus.OK);
     }
+}
 
     @PutMapping("/change-status")
     public ResponseEntity<?> changeStatus(@RequestBody List<PlayerStatusDTO> playerStatusDTOS){

@@ -15,5 +15,7 @@ public interface ICoachTrackingService {
     void deleteById(Long id);
     List<CoachTracking> saveCoachTrackingDTO(List<CoachTrackingDTO> coachTrackingList);
 
+    List<CoachTracking> findAllCoachTrackingByIdAndMonthAndYear(Long id, Integer month, Integer year);
+
 
 }
