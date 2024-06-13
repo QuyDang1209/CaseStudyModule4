@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,11 +18,30 @@ public class CoachController {
     @Autowired
     private ICoachService coachService;
 
-    @GetMapping
-    public ResponseEntity<Iterable<Coach>> findAllCoach() {
-
-        return new ResponseEntity<>(coachService.findAll(), HttpStatus.OK);
+//    @GetMapping
+//    public ResponseEntity<Iterable<Coach>> findAllCoach() {
+//
+//        return new ResponseEntity<>(coachService.findAll(), HttpStatus.OK);
+//    }
+    @GetMapping("")
+    public ResponseEntity<List<Coach>> findAllCoaches(@RequestParam(value = "name", required = false) String name) {
+        List<Coach> list;
+        if (name != null) {
+            list = coachService.findCoachByName(name);
+        } else {
+            list = (List<Coach>) coachService.findAll();
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+//    @GetMapping
+//    public ResponseEntity<Iterable<Coach>> findAllCoach() {
+//        List<Coach> coaches = (List<Coach>) coachService.findAll();
+//        if (coaches.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(coaches, HttpStatus.OK);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Coach> findCoachById(@PathVariable Long id) {

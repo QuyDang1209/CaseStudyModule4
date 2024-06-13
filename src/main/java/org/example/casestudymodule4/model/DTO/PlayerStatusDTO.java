@@ -12,7 +12,4 @@ import lombok.Setter;
 public class PlayerStatusDTO {
     private Long id;
     private Long statusId;
-
-
-
 }

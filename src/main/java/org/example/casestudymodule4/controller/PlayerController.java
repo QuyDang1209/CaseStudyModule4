@@ -75,6 +75,7 @@ public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
             return new ResponseEntity<>(computerOptional.get(), HttpStatus.OK);
         }
     }
+
     @PutMapping("/change-status")
     public ResponseEntity<?> changeStatus(@RequestBody List<PlayerStatusDTO> playerStatusDTOS){
         try {
@@ -86,3 +87,4 @@ public ResponseEntity<?> saveUpload(PlayerDTO playerDTO) {
     }
 
 }
+

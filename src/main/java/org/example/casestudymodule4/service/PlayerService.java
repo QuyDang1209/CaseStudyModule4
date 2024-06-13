@@ -29,6 +29,8 @@ public class PlayerService implements IPlayerService {
     StatusRepository statusRepository;
 
 
+
+
     @Override
     public List<Player> findAll() {
         return playerRepository.findAll();
@@ -83,7 +85,6 @@ public class PlayerService implements IPlayerService {
     }
 
     @Override
-
     public void changeStatus(List<PlayerStatusDTO> playerStatusDTOS) {
             for (PlayerStatusDTO dto : playerStatusDTOS) {
                 Player player = playerRepository.findById(dto.getId()).orElse(null);

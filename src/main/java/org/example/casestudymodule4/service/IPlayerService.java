@@ -7,6 +7,7 @@ import org.example.casestudymodule4.model.DTO.PlayerDTO;
 
 import org.example.casestudymodule4.model.Status;
 
+
 import java.util.List;
 
 public interface IPlayerService {
@@ -15,7 +16,6 @@ public interface IPlayerService {
     void save(Player player);
     void deleteById(Long id);
 
-//    void deleteAllByID(List<Player> players);
     Player savePlayerDTO(PlayerDTO playerDTO);
 
     void changeStatus(List<PlayerStatusDTO> playerStatusDTOS);
